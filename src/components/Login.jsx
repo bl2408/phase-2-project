@@ -1,32 +1,30 @@
-import { useEffect } from "react";
-import { useContext } from "react";
-import { useRef } from "react";
-import { useState } from "react";
+import { useEffect, useContext, useRef, useState } from "react";
 import { epBackend } from "../endpoints";
 import { UserContext } from "./UserContext";
+import { AppContext } from "./App";
 
 export default function Login({
     state = "list",
 }){
 
-    const [formState, setFormState] = useState(state);
-
+    const [viewState, setViewState] = useState(state);
+    const [profileList, setProfileList] = useState([]);
 
     return (
         <>
         
-        {formState === "form" ? 
+        {viewState === "form" ? 
             (
                 <>
-                    <CreateLoginForm setFormState={setFormState} />
-                    <button onClick={()=>setFormState(state=>"list")}>List</button>
+                    <CreateLoginForm setViewState={setViewState} setProfileList={setProfileList}/>
+                    <button onClick={()=>setViewState(state=>"list")}>List</button>
                 </>
             ) 
             : 
             (
                 <>
-                    <LoginProfileList />
-                    <button onClick={()=>setFormState(state=>"form")}>Create</button>
+                    <LoginProfileList setProfileList={setProfileList} profileList={profileList}/>
+                    <button onClick={()=>setViewState(state=>"form")}>Create</button>
                 </>
             )
         }
@@ -36,33 +34,47 @@ export default function Login({
 }
 
 //create a new login
-function CreateLoginForm({setFormState}){
+function CreateLoginForm({setViewState, setProfileList}){
 
     const userName = useRef("");
 
+    const { appState, setAppState} = useContext(AppContext);
+
     const handleSubmit =(e)=>{
         e.preventDefault();
+
+        if(userName.current.value.length <= 0){
+            return ;
+        }
+
+        const userData = {
+            username: userName.current.value,
+            settings: {
+                theme: "light",
+            }
+        };
+
+        setAppState(state=>({...appState, loading:true}));
         
         fetch(epBackend.profiles(), {
             method: "POST",
             headers:{
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                username: userName.current.value,
-                settings: {
-                    theme: "light",
-                }
-            })
+            body: JSON.stringify(userData)
         })
         .then(res=>res.json())
         .then(data=>{
             if(data.id){
                 console.log(data);
-                setFormState(state=>"list");
+                setViewState(state=>"list");
                 userName.current.value = "";
             }
         })
+        .catch(err=>{
+            setProfileList(profiles=>[{id: -1, ...userData}]);
+            setViewState(state=>"list");
+        });
         
         
     };
@@ -74,7 +86,6 @@ function CreateLoginForm({setFormState}){
                 <input 
                     ref={userName} 
                     type="text" 
-                    value={userName.current.value} 
                     onChange={(e)=>userName.current.value = e.target.value}
                 />
                 <input type="submit" value="Create" />
@@ -85,17 +96,26 @@ function CreateLoginForm({setFormState}){
 
 
 //log in via profiles list
-function LoginProfileList(){
+function LoginProfileList({setProfileList, profileList}){
     
-    const [profileList, setProfileList] = useState([]);
     const { logUserInOut } = useContext(UserContext);
-    
+    const { appState, setAppState} = useContext(AppContext);
+
     useEffect(()=>{
+
+        setAppState(state=>({...appState, loading:true}));
+
         fetch(epBackend.profiles())
         .then(res=>res.json())
         .then(data=>{
             setProfileList(profiles=>[...data])
+            setAppState(state=>({...appState, offline:false, loading: false}))
         })
+        .catch(err=>{
+            setAppState(state=>({...appState, offline:true, loading: false}))
+        });
+
+        return ()=>{};
     }, []);
 
     return (

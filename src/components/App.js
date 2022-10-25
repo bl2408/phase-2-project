@@ -1,19 +1,34 @@
-import { useContext } from "react";
+import { useContext, createContext, useState } from "react";
 import { Route, Redirect, Switch } from 'react-router-dom'
 import { UserContext } from "./UserContext";
 
 import Login from "./Login";
 import Navbar from "./Navbar";
+import Loader from "./Loader";
 
+const AppContext = createContext();
 
 function App() {
 
+  const [appState, setAppState] = useState({
+    offline: false,
+    loading: false,
+  })
+
   const { loggedIn } = useContext(UserContext);
 
+
   return (
-    <>
-      {/* Redirects when not logged in */}
-      {loggedIn ? null : <Redirect to="/login" />}
+    <AppContext.Provider value={{appState, setAppState}}>
+      {
+        /* Redirects when not logged in */
+        loggedIn ? null : <Redirect to="/login" />
+      }
+
+      {
+        /* Displays loader */
+        appState.loading ? <Loader /> : null
+      }
 
       <Navbar />
 
@@ -32,8 +47,8 @@ function App() {
         </Route>
 
       </Switch>
-    </>
+    </AppContext.Provider>
   );
 }
 
-export default App;
+export {App, AppContext};
