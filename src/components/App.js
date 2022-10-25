@@ -5,6 +5,7 @@ import { UserContext } from "./UserContext";
 import Login from "./Login";
 import Navbar from "./Navbar";
 import Loader from "./Loader";
+import Dash from "./Dash";
 
 const AppContext = createContext();
 
@@ -34,16 +35,18 @@ function App() {
 
       <Switch>
         <Route exact path="/">
-          <Redirect to="/dex" />
+          <Redirect to="/dash" />
         </Route>
 
-        <Route exact path="/dex">
-          <h1>HI</h1>
+        <Route path="/dash">
+          <Dash />
         </Route>
 
         <Route exact path="/login">
-          {/* Redirects to dex when logged in */}
-          {loggedIn ? <Redirect to="/dex" /> : <Login />}
+          {
+            /* Redirects to dex when logged in */
+            loggedIn ? <Redirect to="/dash" /> : <Login />
+          }
         </Route>
 
       </Switch>

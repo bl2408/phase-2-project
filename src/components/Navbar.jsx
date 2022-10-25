@@ -5,7 +5,7 @@ import {AppContext} from "./App";
 export default function Navbar (){
 
     const {loggedIn, loggedUser, logUserInOut} = useContext(UserContext);
-    const { appState, setAppState} = useContext(AppContext);
+    const { appState } = useContext(AppContext);
 
     const handleLogoutClick =()=>{
         let noCancel = true;

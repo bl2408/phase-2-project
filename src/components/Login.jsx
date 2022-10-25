@@ -66,7 +66,6 @@ function CreateLoginForm({setViewState, setProfileList}){
         .then(res=>res.json())
         .then(data=>{
             if(data.id){
-                console.log(data);
                 setViewState(state=>"list");
                 userName.current.value = "";
             }
