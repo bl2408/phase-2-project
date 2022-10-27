@@ -1,17 +1,21 @@
 const epBackend = {
     base:           `http://localhost:3000`,
-    profiles:       function(){
-                        return `${this.base}/profiles`;
+    profiles:       function(id=""){
+                        return `${this.base}/profiles/${id}`;
                     },
+    items:          function(id){
+                        return `${this.base}/items/${id}`;
+                    },
+
 
 }
 
 const epApi = {
     base:           `https://pokeapi.co/api/v2`,
-    list:           function(){
-                        return `${this.base}/pokemon`
+    list:           function({limit = 20, offset=20}){
+                        return `${this.base}/pokemon?limit=${limit}&offset=${offset}`
                     },
-    details:        function(id){
+    details:        function(id=""){
                         return `${this.base}/pokemon/${id}`
                     }
 

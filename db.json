@@ -5,14 +5,16 @@
       "username": "Brian",
       "settings": {
         "theme": "dark"
-      }
+      },
+      "likes": []
     },
     {
       "id": 2,
       "username": "John",
       "settings": {
         "theme": "light"
-      }
+      },
+      "likes": []
     }
   ]
 }

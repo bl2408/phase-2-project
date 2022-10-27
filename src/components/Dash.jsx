@@ -10,9 +10,11 @@ export default function Dash(){
     const [ itemsObject, setItemsObj ] = useState({
         initLoad: false,
         limit: 20,
-        itemsTotal: 0,
+        total: 0,
         next: null,
         items: [],
+        loading: true,
+        fullPage: false,
     });
 
     return(
