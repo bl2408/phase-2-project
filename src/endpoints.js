@@ -3,8 +3,11 @@ const epBackend = {
     profiles:       function(id=""){
                         return `${this.base}/profiles/${id}`;
                     },
-    items:          function(id){
-                        return `${this.base}/items/${id}`;
+    likes:          function(){
+                        return `${this.base}/likes`;
+                    },
+    likesId:        function(id){
+                        return `${this.base}/likes/${id}`;
                     },
 
 

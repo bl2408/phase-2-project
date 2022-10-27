@@ -14,7 +14,6 @@ export default function Dash(){
         next: null,
         items: [],
         loading: true,
-        fullPage: false,
     });
 
     return(
