@@ -9,12 +9,14 @@ import Dash from "./Dash";
 
 const AppContext = createContext();
 
+const defaultAppState = {
+  offline: false,
+  loading: false,
+}
+
 function App() {
 
-  const [appState, setAppState] = useState({
-    offline: false,
-    loading: false,
-  })
+  const [appState, setAppState] = useState(defaultAppState);
 
   const { loggedIn } = useContext(UserContext);
 
@@ -25,7 +27,6 @@ function App() {
         /* Redirects when not logged in */
         loggedIn ? null : <Redirect to="/login" />
       }
-
       {
         /* Displays loader */
         appState.loading ? <Loader /> : null
@@ -35,7 +36,7 @@ function App() {
 
       <Switch>
         <Route exact path="/">
-          <Redirect to="/dash" />
+          {loggedIn ? <Redirect to="/dash" /> : <Redirect to="/login" /> }
         </Route>
 
         <Route path="/dash">
@@ -54,4 +55,4 @@ function App() {
   );
 }
 
-export {App, AppContext};
+export {App, AppContext, defaultAppState};

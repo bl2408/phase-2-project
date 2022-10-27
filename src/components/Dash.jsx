@@ -1,17 +1,19 @@
-import { useEffect } from "react";
-import { epApi } from "../endpoints";
-import { Route, Switch, useRouteMatch, Link } from "react-router-dom"
+import { useState } from "react";
+import { Route, useRouteMatch, Link } from "react-router-dom"
+import Details from "./dash-components/Details";
+import List from "./dash-components/List";
 
-export default function Dex(){
-
-    // useEffect(()=>{
-    //     fetch(epApi.list())
-    //     .then(res=>res.json())
-    //     .then(data=>console.log(data));
-    // },[]);
+export default function Dash(){
 
     const match = useRouteMatch();
-    console.log(match)
+    
+    const [ itemsObject, setItemsObj ] = useState({
+        initLoad: false,
+        limit: 20,
+        itemsTotal: 0,
+        next: null,
+        items: [],
+    });
 
     return(
         <main>
@@ -21,9 +23,13 @@ export default function Dex(){
                 <Link to={`${match.url}/settings`}>settings</Link>
             </Route>
 
-            <Route exact path={`${match.url}/list`}>
-                <h1>List</h1>
+            <Route exact path={[`${match.url}/list`, `${match.url}/list/:section`]}>
+                <List itemsObject={itemsObject} setItemsObj={setItemsObj} />
                 <Link to={match.url}>back</Link>
+            </Route>
+
+            <Route exact path={`${match.url}/details/:id`}>
+                <Details />
             </Route>
             
             <Route exact path={`${match.url}/settings`}>

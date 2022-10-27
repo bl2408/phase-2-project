@@ -10,6 +10,9 @@ const epApi = {
     base:           `https://pokeapi.co/api/v2`,
     list:           function(){
                         return `${this.base}/pokemon`
+                    },
+    details:        function(id){
+                        return `${this.base}/pokemon/${id}`
                     }
 
 }
