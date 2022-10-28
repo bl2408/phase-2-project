@@ -9,9 +9,9 @@ function UserContextProvider({children}){
   //sets the logged in user to true when a user object is present in loggedUser
   useEffect(()=>{
     if(loggedUser !== null && loggedUser.username){
-      setLoggedIn(true);
+      setLoggedIn(bool=>true);
     }else{
-      setLoggedIn(false);
+      setLoggedIn(bool=>false);
     }
   }, [loggedUser]);
 

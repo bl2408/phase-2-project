@@ -1,9 +1,9 @@
-import { useContext, createContext, useState } from "react";
+import { useContext, createContext, useState, useEffect } from "react";
 import { Route, Redirect, Switch } from 'react-router-dom'
 import { UserContext } from "./UserContext";
 
 import Login from "./Login";
-import Navbar from "./Navbar";
+import Header from "./Header";
 import Loader from "./Loader";
 import Dash from "./Dash";
 
@@ -12,6 +12,7 @@ const AppContext = createContext();
 const defaultAppState = {
   offline: false,
   loading: false,
+  theme: "light"
 }
 
 function App() {
@@ -19,6 +20,12 @@ function App() {
   const [appState, setAppState] = useState(defaultAppState);
 
   const { loggedIn } = useContext(UserContext);
+
+  useEffect(()=>{
+
+    document.documentElement.dataset.theme = appState.theme;
+
+  }, [appState.theme]);
 
 
   return (
@@ -32,7 +39,7 @@ function App() {
         appState.loading ? <Loader /> : null
       }
 
-      <Navbar />
+      <Header />
 
       <Switch>
         <Route exact path="/">

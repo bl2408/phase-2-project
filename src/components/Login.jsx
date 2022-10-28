@@ -98,20 +98,25 @@ function CreateLoginForm({setViewState, setProfileList}){
 function LoginProfileList({setProfileList, profileList}){
     
     const { logUserInOut } = useContext(UserContext);
-    const { appState, setAppState} = useContext(AppContext);
+    const { setAppState } = useContext(AppContext);
+
+    const handleLoginClick=({id, username, settings})=>{
+        setAppState(state=>({...state, theme: settings.theme}))
+        logUserInOut({id, username, settings})
+    }
 
     useEffect(()=>{
 
-        setAppState(state=>({...appState, loading:true}));
+        setAppState(state=>({...state, loading:true}));
 
         fetch(epBackend.profiles())
         .then(res=>res.json())
         .then(data=>{
-            setProfileList(profiles=>[...data])
-            setAppState(state=>({...appState, offline:false, loading: false}))
+            setProfileList(profiles=>[...data]);
+            setAppState(state=>({...state, offline:false, loading: false}))
         })
         .catch(err=>{
-            setAppState(state=>({...appState, offline:true, loading: false}))
+            setAppState(state=>({...state, offline:true, loading: false}))
         });
 
         return ()=>{};
@@ -120,7 +125,7 @@ function LoginProfileList({setProfileList, profileList}){
     return (
         <>
             <h1>Please select a profile</h1>
-            {profileList.map(({id, username, settings})=><button key={id} onClick={()=>logUserInOut({id, username, settings})}>{username}</button>)}
+            {profileList.map(({id, username, settings})=><button key={id} onClick={()=>handleLoginClick({id, username, settings})}>{username}</button>)}
         </>
     );
 }
