@@ -9,6 +9,12 @@ const epBackend = {
     likesId:        function(id){
                         return `${this.base}/likes/${id}`;
                     },
+    commentsId:     function(id){
+                        return `${this.base}/comments/${id}`;
+                    },
+    comments:     function(){
+                        return `${this.base}/comments`;
+                    },
 
 
 }

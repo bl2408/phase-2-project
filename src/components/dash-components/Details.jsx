@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { epApi, epBackend } from "../../endpoints";
+import { epApi } from "../../endpoints";
 import { Link } from "react-router-dom";
 import DetailsImage from "./DetailsImage";
 import DetailsLikes from "./DetailsLikes";
+import DetailsComments from "./DetailsComments";
 
 export default function Details(){
 
@@ -30,6 +31,7 @@ export default function Details(){
                     {details.order} <br />
                     <DetailsImage imageData={details.sprites} imageName={details.name}/> <br />
                     <DetailsLikes id={id} />
+                    <DetailsComments id={id} />
                     </>
                 ) 
                 : "Loading"

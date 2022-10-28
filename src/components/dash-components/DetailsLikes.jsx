@@ -1,17 +1,26 @@
 import { useState, useMemo, useContext, useEffect } from "react";
 import { epBackend } from "../../endpoints";
 import { UserContext } from "../UserContext";
+import { AppContext } from "../App";
 
 export default function DetailsLikes({id}){
 
     const { loggedUser } = useContext(UserContext);
+    const { appState } = useContext(AppContext);
+
     const [countObj, setCount ] = useState({id: id, users: []});
     const [isLiked, setIsLiked ] = useState(false);
     const [hasDb, setHasDb ] = useState(false);
 
     const checkLiked = (arr)=> arr.includes(loggedUser.id);
 
+    //checks if backend has likes for specific ID, will set a default if false
     useEffect(()=>{
+
+        if(appState.offline){
+            return;
+        }
+
         fetch(epBackend.likesId(id))
         .then(res=>res.json())
         .then(data=>{
@@ -19,27 +28,29 @@ export default function DetailsLikes({id}){
                 setCount(c=>data);
             }
             setHasDb(bool=>!!data.id);
-            console.log(hasDb)
             setIsLiked(liked=>checkLiked(data.id ? data.users: countObj.users));
             
         })
     }, []);
 
     const handleLike =()=>{
-        if(loggedUser.id < 0){
+        if(appState.offline){
             return;
         }
 
+        //adds or removes the user from the from the likes array
         const likesObj = {
             users: checkLiked(countObj.users) 
                 ? countObj.users.filter(user=> user !== loggedUser.id) 
                 : [...countObj.users, loggedUser.id]
         }
+
+        //add an id for the likes object if its going to be saved in db for the first time 
         if(!hasDb){
-            console.log("checl", hasDb)
             likesObj.id=id;
         }
 
+        //creates or updates the likes
         fetch(hasDb ? epBackend.likesId(id) : epBackend.likes(), {
             method: hasDb ? "PUT" : "POST",
             headers:{
@@ -62,7 +73,7 @@ export default function DetailsLikes({id}){
 
     return(
         <>
-            <button onClick={handleLike}>{isLiked ? "Unlike" : "Like"}: </button> : {countObj.users.length}
+            <button disabled={appState.offline} onClick={handleLike}>{isLiked ? "Unlike" : "Like"}: </button> : {countObj.users.length}
         </>
     );
 
