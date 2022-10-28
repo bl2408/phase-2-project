@@ -1,5 +1,5 @@
 import { useEffect, useContext, useRef, useState } from "react";
-import { epBackend } from "../endpoints";
+import { epBackend } from "../data/endpoints";
 import { UserContext } from "./UserContext";
 import { AppContext } from "./App";
 

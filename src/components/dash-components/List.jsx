@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { epApi } from "../../endpoints";
+import { epApi } from "../../data/endpoints";
 import { Link, useParams } from "react-router-dom";
 import { useRef } from "react";
 import { useMemo } from "react";

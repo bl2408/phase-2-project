@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { epApi } from "../../endpoints";
+import { epApi } from "../../data/endpoints";
 import { Link } from "react-router-dom";
-import DetailsImage from "./DetailsImage";
-import DetailsLikes from "./DetailsLikes";
-import DetailsComments from "./DetailsComments";
+import DetailsImage from "./details-components/DetailsImage";
+import DetailsLikes from "./details-components/DetailsLikes";
+import DetailsComments from "./details-components/DetailsComments";
 
 export default function Details(){
 

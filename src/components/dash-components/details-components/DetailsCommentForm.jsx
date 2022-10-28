@@ -1,5 +1,5 @@
 import { useRef, useContext } from "react";
-import { AppContext } from "../App";
+import { AppContext } from "../../App";
 
 
 export default function DetailsCommentForm({addComment}){

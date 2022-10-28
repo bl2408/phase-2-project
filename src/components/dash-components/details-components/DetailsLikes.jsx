@@ -1,7 +1,7 @@
 import { useState, useMemo, useContext, useEffect } from "react";
-import { epBackend } from "../../endpoints";
-import { UserContext } from "../UserContext";
-import { AppContext } from "../App";
+import { epBackend } from "../../../data/endpoints";
+import { UserContext } from "../../UserContext";
+import { AppContext } from "../../App";
 
 export default function DetailsLikes({id}){
 

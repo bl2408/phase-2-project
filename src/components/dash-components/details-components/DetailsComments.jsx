@@ -1,8 +1,10 @@
-import { UserContext } from "../UserContext";
-import { AppContext } from "../App";
+import { UserContext } from "../../UserContext";
+import { AppContext } from "../../App";
 import { useContext, useEffect, useState } from "react";
-import { epBackend } from "../../endpoints";
+import { epBackend } from "../../../data/endpoints";
 import DetailsCommentForm from "./DetailsCommentForm";
+import { v4 as uuidv4 } from 'uuid';
+
 
 
 export default function DetailsComments({id}){
@@ -70,8 +72,9 @@ export default function DetailsComments({id}){
     };
 
     const commentsList = commentsObj.comments.map(({username, comment})=>{
+
         return (
-            <div>
+            <div key={uuidv4()}>
                 <div>{username}</div>
                 <div>{comment}</div>
             </div>
