@@ -39,25 +39,41 @@ function App() {
         appState.loading ? <Loader /> : null
       }
 
-      <Header />
+      <div className="wrap" id="header-main">
+        <Header />
+      </div>
+      <div id="header-design">
+          <div id="header-bend">
 
-      <Switch>
-        <Route exact path="/">
-          {loggedIn ? <Redirect to="/dash" /> : <Redirect to="/login" /> }
-        </Route>
+          </div>
+      </div>
 
-        <Route path="/dash">
-          <Dash />
-        </Route>
+      <div className="wrap">
+        <main>
+          <Switch>
+            <Route exact path="/">
+              {loggedIn ? <Redirect to="/dash" /> : <Redirect to="/login" /> }
+            </Route>
 
-        <Route exact path="/login">
-          {
-            /* Redirects to dex when logged in */
-            loggedIn ? <Redirect to="/dash" /> : <Login />
-          }
-        </Route>
+            <Route path="/dash">
+              <Dash />
+            </Route>
 
-      </Switch>
+            <Route exact path="/login">
+              {
+                /* Redirects to dex when logged in */
+                loggedIn ? <Redirect to="/dash" /> : <Login />
+              }
+            </Route>
+
+          </Switch>
+        </main>
+      </div>
+
+      <div id="footer-design"></div>
+      <div className="wrap" id="footer-main">
+            <footer></footer>
+      </div>
     </AppContext.Provider>
   );
 }

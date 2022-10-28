@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { UserContext } from "./UserContext";
 import {AppContext, defaultAppState} from "./App";
 import { useRef } from "react";
+import { epBackend } from "../data/endpoints";
 
 export default function Header (){
 
@@ -23,12 +24,33 @@ export default function Header (){
     };
 
     const toggleTheme =()=>{
+
         const mode = toggleRef.current.checked ? "dark" : "light";
         setAppState(state=> ({...state, theme: mode}));
+
+        if(appState.offline){
+            return 
+        }
+        //update user settings
+        fetch(epBackend.profiles(loggedUser.id),{
+            method: "PUT",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                ...loggedUser,
+                settings: {
+                    ...loggedUser.settings,
+                    theme: mode
+                },
+
+            })
+        })
+
     };
 
     return (
-        <header>
+        <header className="bodySideMargin">
 
             <div className="mode">Mode: {appState.offline ? "Offline" : "Online"}</div>
             {loggedIn ?
@@ -37,7 +59,7 @@ export default function Header (){
                         Welcome {loggedUser.username}
                     </div>
                     <div>
-                        <input checked={appState.theme === "dark"} type="checkbox" ref={toggleRef} onClick={toggleTheme}/>
+                        <input id="toggleTheme" checked={appState.theme === "dark"} type="checkbox" ref={toggleRef} onClick={toggleTheme}/>
                     </div>
                     <div className="logout">
                         <button onClick={handleLogoutClick}>Logout</button>

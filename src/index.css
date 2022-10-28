@@ -1,28 +1,47 @@
+@font-face {
+    font-family: lcd;
+    src: url(./fonts/LcdSolid.ttf);
+}
+
+html{
+    --heightHeader: 80px;
+    --heightFooter: 80px;
+    --mainMargin : 60px;
+    --heightMain: calc(100vh - 220px);
+    font-family: lcd;
+    scroll-behavior: smooth;
+	font-size:62.5%;
+}
+
 html[data-theme="light"]{
     --bgMain: rgb(161 52 52);
-    color: black;
+    --bgMain2: rgb(194, 63, 63);
+    --bgSecondary: rgb(195, 65, 65);
+
+    color: rgb(201, 201, 201);
 
     --btnMainBg:rgb(71, 102, 224);
+    --btnSecondaryBg:rgb(56, 79, 171);
+    
 }
 
 html[data-theme="dark"]{
     --bgMain: rgb(67, 25, 25); 
-    color: rgb(201, 201, 201);
+    --bgMain2: rgb(105, 39, 39); 
+    --bgSecondary: rgb(133, 47, 47); 
+
+    color: rgb(170, 170, 170);
 
     --btnMainBg:rgb(39, 57, 127);
+    --btnSecondaryBg:rgb(24, 35, 79);
 }
 
 button, input[type="submit"] {
     background-color: var(--btnMainBg);
     padding: 5px 10px;
-    border-top-color: rgba(255,255,255, 0.2);
-    border-left-color: rgba(255,255,255, 0.2);
-
-    border-right-color: rgba(0, 0, 0, 0.3);
-    border-bottom-color: rgba(0, 0, 0, 0.3);
-
     border-width: 2px;
     color:inherit;
+    font-family: inherit;
 }
 
 body{
@@ -32,15 +51,15 @@ body{
 }
 header{
     width: 100%;
-    border: solid 1px green;
+    height: var(--heightHeader);
     display: grid;
     grid-template-columns: 1fr 0.5fr;
-    padding: 20px;
-    box-sizing: border-box;
+    align-items: center; 
 }
 
 header .user-section, header .mode{
     display:flex;
+    align-items: center;
     gap: 10px;
 }
 header .user-section{
@@ -48,4 +67,141 @@ header .user-section{
 }
 header .mode{
     justify-content: flex-start;
+}
+
+footer{
+    width: 100%;
+    height: var(--heightFooter);
+}
+
+main {
+    width: 100%;
+    height: var(--heightMain);
+    min-height: 300px;
+    overflow: auto;
+    margin-top: var(--mainMargin);
+}
+
+#header-main{
+    background-color: var(--bgMain2);
+}
+
+#header-design{
+    width: 100%;
+    height: 80px;
+    background-image: url("./images/header-repeat.png");
+    background-repeat: repeat-x;
+    position: absolute;
+    z-index: -1;
+}
+#header-bend{
+    width: 217px;
+    height: 80px;
+    background-image: url("./images/header-bend.png");
+    background-repeat: no-repeat;
+    background-color: var(--bgMain);
+}
+
+#footer-main{
+    background-color: var(--bgMain2);
+    height: 80px;
+}
+
+#footer-design{
+    background-image: url("./images/footer.png");
+    background-repeat: repeat-x;
+    width: 100%;
+    height: 40px;
+}
+
+#loader-box{
+    width: 200px;
+    height: 80px;
+    border-width: 3px;
+    border-style: solid;
+    background-color: var(--bgSecondary);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2rem;
+}
+
+#toggleTheme[type="checkbox"]{
+    -webkit-appearance: none;
+    appearance: none;
+}
+#toggleTheme{
+    position: relative;
+    display: block;
+    width: 50px;
+    height: 26px;
+    background-color: var(--btnSecondaryBg);
+    cursor: pointer;
+    border-style: solid;
+    border-width: 2px;
+
+}
+#toggleTheme::after{
+    content:'';
+    position: absolute;
+    width: 18px;
+    height: 15px;
+    top: 1px;
+    left: 2px;
+    background-color: var(--btnMainBg);
+    transition: 0.1s ease-in;
+    border-style: solid;
+    border-width: 2px;
+}
+
+#toggleTheme:checked::after{
+    transform: translateX(19px);
+    background-color: var(--btnMainBg);
+    border-style: solid;
+    border-width: 2px;
+}
+
+/* CLASSES */
+.wrap{
+    width: 100%;
+    display: flex;
+
+    padding: 0 14px;
+    box-sizing: border-box;
+    font-size: 1.6rem;
+}
+
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(3px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    overflow: auto;
+}
+.border-bevel, button, #toggleTheme::after, #toggleTheme:checked::after{
+    border-top-color: rgba(255,255,255, 0.2);
+    border-left-color: rgba(255,255,255, 0.2);
+
+    border-right-color: rgba(0, 0, 0, 0.3);
+    border-bottom-color: rgba(0, 0, 0, 0.3);
+}
+.border-bevel-invert, #toggleTheme{
+    border-bottom-color: rgba(255,255,255, 0.2);
+    border-right-color: rgba(255,255,255, 0.2);
+
+    border-left-color: rgba(0, 0, 0, 0.3);
+    border-top-color: rgba(0, 0, 0, 0.3);
 }

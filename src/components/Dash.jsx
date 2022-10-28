@@ -17,7 +17,7 @@ export default function Dash(){
     });
 
     return(
-        <main>
+        <>
 
             <Route exact path={match.url}>
                 <Link to={`${match.url}/list`}>list</Link>
@@ -39,6 +39,6 @@ export default function Dash(){
             </Route>
 
             
-        </main>
+        </>
     );
 }
