@@ -22,6 +22,9 @@ html[data-theme="light"]{
 
     --btnMainBg:rgb(71, 102, 224);
     --btnSecondaryBg:rgb(56, 79, 171);
+
+    --headerBendImg: url("./images/header-bend-light.png");
+    --headerOrbImg: url("./images/orb-light.png");
     
 }
 
@@ -34,6 +37,9 @@ html[data-theme="dark"]{
 
     --btnMainBg:rgb(39, 57, 127);
     --btnSecondaryBg:rgb(24, 35, 79);
+
+    --headerBendImg: url("./images/header-bend-dark.png");
+    --headerOrbImg: url("./images/orb-dark.png");
 }
 
 button, input[type="submit"] {
@@ -53,7 +59,7 @@ header{
     width: 100%;
     height: var(--heightHeader);
     display: grid;
-    grid-template-columns: 1fr 0.5fr;
+    grid-template-columns: auto auto;
     align-items: center; 
 }
 
@@ -67,6 +73,7 @@ header .user-section{
 }
 header .mode{
     justify-content: flex-start;
+    margin-left: 217px;
 }
 
 footer{
@@ -97,9 +104,23 @@ main {
 #header-bend{
     width: 217px;
     height: 80px;
-    background-image: url("./images/header-bend.png");
+    background-image: var(--headerBendImg);
     background-repeat: no-repeat;
     background-color: var(--bgMain);
+}
+
+#orb{
+    width:116px;
+    height: 109px;
+
+    background-image: var(--headerOrbImg);
+    background-repeat: repeat-x;
+    position: absolute;
+    z-index: 1;
+
+    top:0;
+    left: 0;
+
 }
 
 #footer-main{

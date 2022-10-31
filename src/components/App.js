@@ -39,6 +39,8 @@ function App() {
         appState.loading ? <Loader /> : null
       }
 
+      <div id="orb"></div>
+
       <div className="wrap" id="header-main">
         <Header />
       </div>
