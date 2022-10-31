@@ -20,9 +20,20 @@ export default function Dash(){
         <>
 
             <Route exact path={match.url}>
-                
-                <Link to={`${match.url}/list`}>list</Link>
-                <Link to={`${match.url}/settings`}>settings</Link>
+                <div id="section-menu">
+                <Link to={`${match.url}/list`}>
+                    <div className="link-card">
+                        <div><i className="fa fa-list"></i></div>
+                        <div>List</div>
+                    </div>
+                </Link>
+                <Link to={`${match.url}/settings`}>
+                    <div className="link-card">
+                        <div><i className="fa fa-user-circle"></i></div>
+                        <div>Settings</div>
+                    </div>
+                </Link>
+                </div>
             </Route>
 
             <Route exact path={[`${match.url}/list`, `${match.url}/list/:section`]}>

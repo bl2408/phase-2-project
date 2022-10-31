@@ -16,17 +16,20 @@ export default function Login({
         
         {viewState === "form" ? 
             (
-                <>
+                <div className="section-login">
                     <CreateLoginForm setViewState={setViewState} setProfileList={setProfileList}/>
+                    <hr />
                     <button onClick={()=>setViewState(state=>"list")}>List</button>
-                </>
+                </div>
             ) 
             : 
             (
-                <>
+                <div className="section-login">
+                    <h1>Choose a profile</h1>
                     <LoginProfileList setProfileList={setProfileList} profileList={profileList}/>
+                    <hr />
                     <button onClick={()=>setViewState(state=>"form")}>Create</button>
-                </>
+                </div>
             )
         }
         
@@ -83,7 +86,9 @@ function CreateLoginForm({setViewState, setProfileList}){
         <>
             <h1>Create a Profile</h1>
             <form onSubmit={handleSubmit}>
-                <input 
+                <label htmlFor="formUsername">Username:</label>
+                <input
+                    id="formUsername"
                     ref={userName} 
                     type="text" 
                     onChange={(e)=>userName.current.value = e.target.value}
@@ -124,9 +129,8 @@ function LoginProfileList({setProfileList, profileList}){
     }, []);
 
     return (
-        <>
-            <h1>Please select a profile</h1>
+        <div id="list-profiles">
             {profileList.map(({id, username, settings})=><button key={uuidv4()} onClick={()=>handleLoginClick({id, username, settings})}>{username}</button>)}
-        </>
+        </div>
     );
 }
