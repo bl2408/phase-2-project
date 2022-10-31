@@ -6,8 +6,8 @@
 html{
     --heightHeader: 80px;
     --heightFooter: 80px;
-    --mainMargin : 60px;
-    --heightMain: calc(100vh - 220px);
+    --mainMargin : 80px;
+    --heightMain: calc(100vh - 280px);
     font-family: lcd;
     scroll-behavior: smooth;
 	font-size:62.5%;
@@ -87,7 +87,18 @@ main {
     min-height: 300px;
     overflow: auto;
     margin-top: var(--mainMargin);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+#content-main{
+    width: 90%;
+    height: 90%;
+}
+
+
 
 #header-main{
     background-color: var(--bgMain2);

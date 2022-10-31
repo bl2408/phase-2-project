@@ -1,5 +1,5 @@
 import { useContext, createContext, useState, useEffect } from "react";
-import { Route, Redirect, Switch } from 'react-router-dom'
+import { Route, Redirect, Switch, useRouteMatch } from 'react-router-dom'
 import { UserContext } from "./UserContext";
 
 import Login from "./Login";
@@ -52,23 +52,27 @@ function App() {
 
       <div className="wrap">
         <main>
-          <Switch>
-            <Route exact path="/">
-              {loggedIn ? <Redirect to="/dash" /> : <Redirect to="/login" /> }
-            </Route>
+          <div id="content-main">
+            
+            <Switch>
+              <Route exact path="/">
+                {loggedIn ? <Redirect to="/dash" /> : <Redirect to="/login" /> }
+              </Route>
 
-            <Route path="/dash">
-              <Dash />
-            </Route>
+              <Route path="/dash">
+                <Dash />
+              </Route>
 
-            <Route exact path="/login">
-              {
-                /* Redirects to dex when logged in */
-                loggedIn ? <Redirect to="/dash" /> : <Login />
-              }
-            </Route>
+              <Route exact path="/login">
+                {
+                  /* Redirects to dex when logged in */
+                  loggedIn ? <Redirect to="/dash" /> : <Login />
+                }
+              </Route>
 
-          </Switch>
+            </Switch>
+
+          </div>
         </main>
       </div>
 

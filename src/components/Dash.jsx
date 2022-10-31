@@ -20,6 +20,7 @@ export default function Dash(){
         <>
 
             <Route exact path={match.url}>
+                
                 <Link to={`${match.url}/list`}>list</Link>
                 <Link to={`${match.url}/settings`}>settings</Link>
             </Route>

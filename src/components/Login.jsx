@@ -2,6 +2,7 @@ import { useEffect, useContext, useRef, useState } from "react";
 import { epBackend } from "../data/endpoints";
 import { UserContext } from "./UserContext";
 import { AppContext } from "./App";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Login({
     state = "list",
@@ -125,7 +126,7 @@ function LoginProfileList({setProfileList, profileList}){
     return (
         <>
             <h1>Please select a profile</h1>
-            {profileList.map(({id, username, settings})=><button key={id} onClick={()=>handleLoginClick({id, username, settings})}>{username}</button>)}
+            {profileList.map(({id, username, settings})=><button key={uuidv4()} onClick={()=>handleLoginClick({id, username, settings})}>{username}</button>)}
         </>
     );
 }

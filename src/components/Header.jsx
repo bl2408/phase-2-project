@@ -59,7 +59,7 @@ export default function Header (){
                         Welcome {loggedUser.username}
                     </div>
                     <div>
-                        <input id="toggleTheme" checked={appState.theme === "dark"} type="checkbox" ref={toggleRef} onClick={toggleTheme}/>
+                        <input id="toggleTheme" checked={appState.theme === "dark"} type="checkbox" ref={toggleRef} onChange={toggleTheme}/>
                     </div>
                     <div className="logout">
                         <button onClick={handleLogoutClick}>Logout</button>

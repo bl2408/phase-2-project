@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { epApi } from "../../data/endpoints";
 import { Link, useParams } from "react-router-dom";
 import { useRef } from "react";
-import { useMemo } from "react";
 
 export default function List({itemsObject, setItemsObj}){
 
