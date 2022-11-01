@@ -20,7 +20,7 @@ export default function Dash(){
         <>
 
             <Route exact path={match.url}>
-                <div id="section-menu">
+                <div id="section-menu" className="section-flex">
                 <Link to={`${match.url}/list`}>
                     <div className="link-card">
                         <div><i className="fa fa-list"></i></div>
@@ -38,7 +38,6 @@ export default function Dash(){
 
             <Route exact path={[`${match.url}/list`, `${match.url}/list/:section`]}>
                 <List itemsObject={itemsObject} setItemsObj={setItemsObj} />
-                <Link to={match.url}>back</Link>
             </Route>
 
             <Route exact path={`${match.url}/details/:id`}>

@@ -16,7 +16,7 @@ export default function Login({
         
         {viewState === "form" ? 
             (
-                <div className="section-login">
+                <div className="section-login section-flex">
                     <CreateLoginForm setViewState={setViewState} setProfileList={setProfileList}/>
                     <hr />
                     <button onClick={()=>setViewState(state=>"list")}>List</button>
@@ -24,7 +24,7 @@ export default function Login({
             ) 
             : 
             (
-                <div className="section-login">
+                <div className="section-login section-flex">
                     <h1>Choose a profile</h1>
                     <LoginProfileList setProfileList={setProfileList} profileList={profileList}/>
                     <hr />

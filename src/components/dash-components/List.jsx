@@ -92,16 +92,22 @@ export default function List({itemsObject, setItemsObj}){
     
 
     const list = itemsObject.items.map(item=>{
-        return <div id={item.name} key={item.name}><Link to={`/dash/details/${item.name}`}>{item.name}</Link></div>
+        return <div className="list-item" id={item.name} key={item.name}><Link to={`/dash/details/${item.name}`}>{item.name}</Link></div>
     });
      
 
     return(
-        <>
-            <div ref={mainEl} onScroll={scrollLoad} style={{overflow: "auto", maxHeight: "300px"}}>
+        <div id="section-list">
+            <h1>Pokemon List</h1>
+            <div ref={mainEl} onScroll={scrollLoad} style={{overflow: "auto"}}>
                 {list}
             </div>
-            Showing {itemsObject.items.length} of {itemsObject.total}.
-        </>
+            <div>
+                Showing {itemsObject.items.length} of {itemsObject.total}.
+                <br />
+                <br />
+                <Link to={`/dash`}><button>Back</button></Link>
+            </div>
+        </div>
     );
 }
