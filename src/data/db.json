@@ -1,18 +1,20 @@
 {
   "profiles": [
     {
-      "id": 2,
+      "id": 1,
       "username": "Brian",
       "settings": {
-        "theme": "light"
-      }
+        "theme": "dark"
+      },
+      "favourites": []
     },
     {
       "id": 2,
       "username": "John",
       "settings": {
         "theme": "light"
-      }
+      },
+      "favourites": []
     }
   ],
   "likes": [],

@@ -31,6 +31,9 @@ export default function DetailsLikes({id}){
             setIsLiked(liked=>checkLiked(data.id ? data.users: countObj.users));
             
         })
+
+        return ()=>{};
+
     }, []);
 
     const handleLike =()=>{

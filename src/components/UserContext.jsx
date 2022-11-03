@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { epBackend } from "../data/endpoints";
 
 const UserContext = createContext();
 
@@ -20,8 +21,30 @@ function UserContextProvider({children}){
     setLoggedUser(user=>userObj);
   };
 
+  const isFaved =(id, arr)=> arr.includes(id);
+
+  const addToFav =(id)=>{
+
+    fetch(epBackend.profiles(loggedUser.id),{
+      method: "PUT",
+      headers:{
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        ...loggedUser,
+        favourites: isFaved(id, loggedUser.favourites) ? loggedUser.favourites.filter(fav=> fav !== id) : [...loggedUser.favourites, id]
+      })
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      setLoggedUser(user=>data)
+    })
+    .catch(err=>console.log(err));
+
+  };
+
   return(
-    <UserContext.Provider value={{loggedIn, loggedUser, logUserInOut}}>
+    <UserContext.Provider value={{loggedIn, loggedUser, logUserInOut, addToFav, isFaved}}>
         {children}
     </UserContext.Provider>
   );

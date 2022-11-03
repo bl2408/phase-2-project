@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { epApi } from "../../data/endpoints";
 import { Link } from "react-router-dom";
 import DetailsImage from "./details-components/DetailsImage";
@@ -7,8 +7,11 @@ import DetailsLikes from "./details-components/DetailsLikes";
 import DetailsComments from "./details-components/DetailsComments";
 import DetailsInfo from "./details-components/DetailsInfo";
 import { AppContext } from "../App";
+import DetailsFav from "./details-components/DetailsFav";
 
 export default function Details(){
+
+    const history = useHistory();
 
     const { id } = useParams();
 
@@ -43,7 +46,7 @@ export default function Details(){
                         <div>
                             <DetailsInfo data={details}/>
                             <hr />
-                            <DetailsLikes id={id} />
+                            <DetailsLikes id={id} /> | <DetailsFav id={id} />
                             <hr />
                             <DetailsComments id={id} />
                         </div>
@@ -53,7 +56,7 @@ export default function Details(){
                 ) 
                 : null
             }
-            <div><Link to={`/dash/list/${id}`}><button>Back</button></Link></div>
+            <div><Link to={`/dash/${history.location.state.from}/${id}`}><button>Back</button></Link></div>
         </div>
     );
 }

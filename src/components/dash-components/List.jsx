@@ -92,7 +92,7 @@ export default function List({itemsObject, setItemsObj}){
     
 
     const list = itemsObject.items.map(item=>{
-        return <div className="list-item" id={item.name} key={item.name}><Link to={`/dash/details/${item.name}`}>{item.name}</Link></div>
+        return <div className="list-item" id={item.name} key={item.name}><Link to={{pathname:`/dash/details/${item.name}`, state: { from: "list" }}}>{item.name}</Link></div>
     });
      
 

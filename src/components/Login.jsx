@@ -106,9 +106,9 @@ function LoginProfileList({setProfileList, profileList}){
     const { logUserInOut } = useContext(UserContext);
     const { setAppState } = useContext(AppContext);
 
-    const handleLoginClick=({id, username, settings})=>{
+    const handleLoginClick=({id, username, settings, favourites})=>{
         setAppState(state=>({...state, theme: settings.theme}))
-        logUserInOut({id, username, settings})
+        logUserInOut({id, username, settings, favourites})
     }
 
     useEffect(()=>{
@@ -130,7 +130,7 @@ function LoginProfileList({setProfileList, profileList}){
 
     return (
         <div id="list-profiles">
-            {profileList.map(({id, username, settings})=><button key={uuidv4()} onClick={()=>handleLoginClick({id, username, settings})}>{username}</button>)}
+            {profileList.map(({id, username, settings, favourites})=><button key={uuidv4()} onClick={()=>handleLoginClick({id, username, settings, favourites})}>{username}</button>)}
         </div>
     );
 }

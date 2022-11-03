@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Route, useRouteMatch, Link } from "react-router-dom"
 import Details from "./dash-components/Details";
+import Favourites from "./dash-components/Favourites";
 import List from "./dash-components/List";
 
 export default function Dash(){
@@ -27,10 +28,10 @@ export default function Dash(){
                         <div>List</div>
                     </div>
                 </Link>
-                <Link to={`${match.url}/settings`}>
+                <Link to={`${match.url}/favourites`}>
                     <div className="link-card">
                         <div><i className="fa fa-user-circle"></i></div>
-                        <div>Settings</div>
+                        <div>Favourites</div>
                     </div>
                 </Link>
                 </div>
@@ -44,9 +45,8 @@ export default function Dash(){
                 <Details />
             </Route>
             
-            <Route exact path={`${match.url}/settings`}>
-                <h1>Settings</h1>
-                <Link to={match.url}>back</Link>
+            <Route exact path={[`${match.url}/favourites`, `${match.url}/favourites/:section`]}>
+                <Favourites />
             </Route>
 
             
