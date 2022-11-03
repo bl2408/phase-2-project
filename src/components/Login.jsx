@@ -55,7 +55,8 @@ function CreateLoginForm({setViewState, setProfileList}){
             username: userName.current.value,
             settings: {
                 theme: "light",
-            }
+            },
+            favourites: [],
         };
 
         setAppState(state=>({...appState, loading:true}));

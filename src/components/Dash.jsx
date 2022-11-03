@@ -29,7 +29,7 @@ export default function Dash(){
                 </Link>
                 <Link to={`${match.url}/favourites`}>
                     <div className="link-card">
-                        <div><i className="fa fa-user-circle"></i></div>
+                        <div><i className="fa fa-book"></i></div>
                         <div>Favourites</div>
                     </div>
                 </Link>
