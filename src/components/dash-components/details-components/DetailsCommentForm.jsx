@@ -24,10 +24,10 @@ export default function DetailsCommentForm({addComment}){
     };
 
     return (
-        <div>
+        <div className="section-comment-form">
             <form onSubmit={handleSubmit}>
                 <textarea ref={textareaRef} disabled={appState.offline}></textarea>
-                <input type="submit" value="Submit" disabled={appState.offline}/>
+                <input type="submit" value="Add comment" disabled={appState.offline}/>
             </form>
         </div>
     );

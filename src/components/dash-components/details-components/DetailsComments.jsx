@@ -74,7 +74,7 @@ export default function DetailsComments({id}){
     const commentsList = commentsObj.comments.map(({username, comment})=>{
 
         return (
-            <div key={uuidv4()}>
+            <div className="user-comment" key={uuidv4()}>
                 <div>{username}</div>
                 <div>{comment}</div>
             </div>
@@ -84,7 +84,7 @@ export default function DetailsComments({id}){
 
     return (
         <div>
-            {commentsObj.comments.length} comment(s).
+            {commentsObj.comments.length} {commentsObj.comments.length === 1 ? "Comment" : "Comments"}. <br /><br />
             {commentsList}
             <DetailsCommentForm addComment={addComment}/>
         </div>

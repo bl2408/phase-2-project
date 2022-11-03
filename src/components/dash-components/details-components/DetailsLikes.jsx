@@ -73,7 +73,8 @@ export default function DetailsLikes({id}){
 
     return(
         <>
-            <button disabled={appState.offline} onClick={handleLike}>{isLiked ? "Unlike" : "Like"}: </button> : {countObj.users.length}
+            <button disabled={appState.offline} onClick={handleLike}>{isLiked ? <i className="fa fa-heart	"></i> : <i className="fa fa-heart-o"></i>}</button> 
+            &nbsp;{countObj.users.length} {countObj.users.length === 1 ? "Like" : "Likes"}
         </>
     );
 

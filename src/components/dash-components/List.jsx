@@ -35,7 +35,7 @@ export default function List({itemsObject, setItemsObj}){
     useEffect(()=>{       
         //scrolls to section if section param is in url
         if(section){
-            document.querySelector(`#${section}`)?.scrollIntoView({behavior:"smooth", block: "start", inline: "nearest"});
+            document.querySelector(`#${section}`)?.scrollIntoView({ block: "start", inline: "nearest"});
         }
     }, []);
 
@@ -97,9 +97,9 @@ export default function List({itemsObject, setItemsObj}){
      
 
     return(
-        <div id="section-list">
+        <div id="section-grid">
             <h1>Pokemon List</h1>
-            <div ref={mainEl} onScroll={scrollLoad} style={{overflow: "auto"}}>
+            <div ref={mainEl} onScroll={scrollLoad}>
                 {list}
             </div>
             <div>

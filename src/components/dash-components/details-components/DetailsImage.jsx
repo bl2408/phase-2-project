@@ -42,9 +42,14 @@ export default function DetailsImage({imageData, imageName}){
     }); //final image JSX array
 
     return (
-        <>
-            <img src={main} alt={`${imageName} | official art`} />
-            {extraImgs}
-        </>
+        <div className="section-image">
+            <div>
+                <img src={main} alt={`${imageName} | official art`} />
+            </div>
+            <div>
+                {extraImgs}
+            </div>
+            
+        </div>
     );
 }
