@@ -16,7 +16,7 @@ export default function DetailsFav({id}){
 
     return(
         <>
-            <button onClick={()=>addToFav(id)}>{checkFav() ? "Unfavourite" : "Favourite"}</button>
+            <button onClick={()=>addToFav(id)}>{checkFav() ? <i className="fa fa-bookmark"></i> : <i className="fa fa-bookmark-o"></i>}</button>
         </>
     );
 
