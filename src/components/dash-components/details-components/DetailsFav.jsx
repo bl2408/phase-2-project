@@ -1,22 +1,26 @@
 import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../UserContext";
-import { AppContext } from "../../App";
 
 export default function DetailsFav({id}){
 
     const { loggedUser, isFaved, addToFav } = useContext(UserContext);
-    const { appState } = useContext(AppContext);
 
-    const checkFav = ()=>{
-        if(isFaved){
-            return isFaved(id, loggedUser.favourites);
-        }
-        return false;
+    const [isFav, setIsFav ] = useState(false);
+    
+    const checkFav = ()=>loggedUser ? isFaved(id, loggedUser.favourites) : false;
+    
+    useEffect(()=>{
+        setIsFav(fav => checkFav());
+    }, [loggedUser.favourites]);
+
+    const handleToggleFav =()=>{
+        addToFav(id)
     };
+
 
     return(
         <>
-            <button onClick={()=>addToFav(id)}>{checkFav() ? <i className="fa fa-bookmark"></i> : <i className="fa fa-bookmark-o"></i>}</button>
+            <button onClick={handleToggleFav}>{isFav ? <i className="fa fa-bookmark"></i> : <i className="fa fa-bookmark-o"></i>}</button>
         </>
     );
 

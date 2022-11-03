@@ -19,6 +19,7 @@ export default function Details(){
 
     const { appState, setAppState} = useContext(AppContext);
 
+
     //loads data from endpoint 
     useEffect(()=>{
 
@@ -30,7 +31,7 @@ export default function Details(){
             setDetails(dets=>(data));
             setAppState(state=>({...appState, loading:false}));
         });
-
+        return ()=>{};
     }, []);
 
     return (

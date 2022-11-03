@@ -19,7 +19,7 @@ function App() {
 
   const [appState, setAppState] = useState(defaultAppState);
 
-  const { loggedIn } = useContext(UserContext);
+  const { loggedIn, loggedUser } = useContext(UserContext);
 
   useEffect(()=>{
 
@@ -32,7 +32,7 @@ function App() {
     <AppContext.Provider value={{appState, setAppState}}>
       {
         /* Redirects when not logged in */
-        loggedIn ? null : <Redirect to="/login" />
+        loggedIn || (loggedUser !==null && !!loggedUser.username) ? null : <Redirect to="/login" />
       }
       {
         /* Displays loader */
@@ -60,7 +60,7 @@ function App() {
               </Route>
 
               <Route path="/dash">
-                <Dash />
+                 <Dash />
               </Route>
 
               <Route exact path="/login">

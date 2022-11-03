@@ -19,7 +19,6 @@ export default function Dash(){
 
     return(
         <>
-
             <Route exact path={match.url}>
                 <div id="section-menu" className="section-flex">
                 <Link to={`${match.url}/list`}>

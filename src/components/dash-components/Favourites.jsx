@@ -17,7 +17,7 @@ export default function Favourites(){
         }
     }, []);
 
-    const list = loggedIn ? loggedUser.favourites.map(item=>{
+    const list = loggedIn && !!loggedUser.favourites ? loggedUser.favourites.map(item=>{
         return <div className="list-item" id={item} key={item}><Link to={{pathname:`/dash/details/${item}`, state: { from: "favourites" }}}>{item}</Link></div>
     }) : null;
      
@@ -29,7 +29,7 @@ export default function Favourites(){
                 {list}
             </div>
             <div>
-                {loggedUser.favourites.length} total favourites.
+                {!!loggedUser.favourites ? loggedUser.favourites.length : 0} total favourites.
                 <br />
                 <br />
                 <Link to={`/dash`}><button>Back</button></Link>
