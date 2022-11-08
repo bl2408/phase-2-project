@@ -38,20 +38,10 @@ export default function DetailsImage({imageData, imageName}){
             return 0;
         })
         .map(({url, pose})=>{
-
-            const altString = `${imageName}${(pose !=="none" ? ` | ${pose}` : "")}`;
-
-            const finalImage = <img 
-            key={url} 
-            src={url} 
-            alt={altString} 
-            />
-
             return url
-        }); //final image JSX array
+        });
 
         setAllImages(imgs=>[main, ...extraImgs])
-        //console.log(allImages)
     },[]);
 
     
